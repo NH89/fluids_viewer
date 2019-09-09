@@ -64,7 +64,7 @@
 #define FILE        "./particle_files/particles_pos_100000.h5"//"SDS.h5"
 #define DATASETNAME "Vec3DF_Array" 
 #define NX_SUB  3                       /* hyperslab dimensions */ 
-#define NY_SUB  4 
+#define NY_SUB  1 
 #define NX 7                            /* output buffer dimensions */ 
 #define NY 7 
 #define NZ  3 
@@ -99,10 +99,10 @@ int main (void){
     dataset = H5Dopen(file, DATASETNAME, H5P_DEFAULT);
 
     /* Get datatype and dataspace handles and then query dataset class, order, size, rank and dimensions.*/
-    datatype    = H5Dget_type(dataset);                                     /* datatype handle */ 
-    class_t     = H5Tget_class(datatype);
+    datatype    =  H5Dget_type(dataset);                                     /* datatype handle */ 
+    class_t     =  H5Tget_class(datatype);
     if (class_t == H5T_FLOAT) printf("Data set has FLOAT type \n");
-    order       = H5Tget_order(datatype);
+    order       =  H5Tget_order(datatype);
     if (order   == H5T_ORDER_LE) printf("Little endian order \n");
 
     size  = H5Tget_size(datatype);
@@ -113,6 +113,12 @@ int main (void){
     status_n  = H5Sget_simple_extent_dims(dataspace, dims_out, NULL);
     printf("rank %d, dimensions %lu x %lu \n", rank,
 	   (unsigned long)(dims_out[0]), (unsigned long)(dims_out[1]));
+    
+    ///  need to allocate an array of the right size
+    
+    
+    
+    
 
     offset[0] = 1;                                                          /* Define hyperslab in the dataset. */
     offset[1] = 2;
